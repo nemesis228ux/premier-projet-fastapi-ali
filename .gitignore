@@ -1,0 +1,35 @@
+# Environnement virtuel
+.venv/
+venv/
+.venv/
+
+# Python
+_pycache_/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+*.sqlite3
+
+# IDE / éditeurs
+.vscode/
+.idea/
+*.swp
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+Logs
+*.log
+*.pot
+*.mo
+
+# Env vars
+.env
+
+
+#autres
+.DB_store
+

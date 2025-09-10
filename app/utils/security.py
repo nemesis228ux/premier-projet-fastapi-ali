@@ -1,0 +1,14 @@
+from passlib.context import CryptContext
+
+# config de passLib pour bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def hash_password(password: str) -> str:
+  """Hasher un mot de passe en utilisant bycrypt"""
+  return pwd_context.hash(password)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> str:
+  """Verifier si le mot de pass est correct""" 
+  return pwd_context.verify(plain_password, hashed_password)
