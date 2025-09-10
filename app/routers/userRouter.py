@@ -4,10 +4,13 @@ from pydantic import EmailStr
 from sqlalchemy.orm import Session
 from app.schemas.userSchema import UserCreate, UserRead, UserUpdate
 from app.core.database import get_db
+from app.models.user import User
 from app.crud.userCrud import (
   create_user, get_user, get_users, 
   get_user_by_email, update_user, delete_user)
 from typing import Annotated
+from app.auth.dependencies import get_current_user
+
 
 
 
@@ -32,8 +35,12 @@ def read_user_by_email(q: Annotated[EmailStr, Query()], db: Session = Depends(ge
 
 
 ## avoir tous les users
-@router.get("/", response_model=list[UserRead])
-def read_all_user(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+@router.get(
+  "/", 
+    response_model=list[UserRead], 
+    summary="Liste tous les users. la routes est proteger donc faut login"
+  )
+def read_all_user(current_user: User = Depends(get_current_user), db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
   return get_users(db, skip=skip, limit=limit)
 
 

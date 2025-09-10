@@ -5,13 +5,14 @@ from app.schemas.articleSchema import ArticleCreate, ArticleRead, ArticleUpdate
 from app.core.database import get_db
 from app.models.article import Article
 from app.crud.articleCrud import get_article, get_articles, delete_article, create_article, update_article
+from app.auth.dependencies import get_current_user
 
 
 
 router = APIRouter(prefix="/articles", tags=["articles"])
 
 
-@router.get("/", response_model=list[ArticleRead])
+@router.get("/", response_model=list[ArticleRead], summary="Lister tous les aticles")
 def read_all_articles(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
   return get_articles(db, skip=skip, limit=limit)
 

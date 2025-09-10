@@ -11,7 +11,7 @@ from app.auth.jwt_handler import decode_access_token
 
 # OAuth2PasswordBearer: fastapi va chercher automatiquement 
 # le token dans Authorization
-oauth_schema = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth_schema = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 def get_current_user(
@@ -38,7 +38,7 @@ def get_current_user(
       headers={"www-Authenticate": "Bearer"},
     )
 
-  user = db.query(User).filter(User.id == user_id)
+  user = db.query(User).filter(User.id == int(user_id)).first()
   if user is None:
     raise HTTPException(
       status_code=status.HTTP_404_NOT_FOUND, 
