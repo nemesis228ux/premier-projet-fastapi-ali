@@ -12,7 +12,7 @@ def create_access_token(data: dict, expire_delta: timedelta | None = None) -> st
 
   to_encode = data.copy() # reaser une petite copy
   expiration = datetime.utcnow() + (
-    expire_delta or timedelta(minuite=ACCESS_TOKEN_EXPIRES_MINUITES)
+    expire_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRES_MINUITES)
     )
   
   to_encode.update({"exp": expiration})
@@ -24,7 +24,7 @@ def create_access_token(data: dict, expire_delta: timedelta | None = None) -> st
 
 
 ## funct pr verifier le token
-def decode_access_token(token: str) -> dict[str, None]:
+def decode_access_token(token: str) -> dict | None:
   
   """func pr decoder les tokens. il renvoi les infos
     du token sinon None""" 

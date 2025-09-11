@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from app.routers import userRouter, articleRouter
+from app.routers import userRouter, articleRouter, authRouter
 
 app = FastAPI()
 
 ## inclusion des routes dans le main
 app.include_router(userRouter.router)
 app.include_router(articleRouter.router)
+app.include_router(authRouter.router)
 
 
 @app.get("/")
